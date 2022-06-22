@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :accounts
-  resources :users
+  
+  namespace :api do
+    resources :sessions, only: [:create, :destroy] 
+    resources :accounts
+
+
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
