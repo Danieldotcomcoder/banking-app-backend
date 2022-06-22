@@ -1,14 +1,9 @@
-# frozen_string_literal: true
-
 Rails.application.routes.draw do
-  devise_for :users
-
-  namespace :api do
-    resources :sessions, only: %i[create destroy]
-    resources :accounts
-  end
+  resources :accounts
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
+  resources :users, param: :_username
+  post '/auth/login', to: 'authentication#login'
+  get '/*a', to: 'application#not_found'
   # Defines the root path route ("/")
   # root "articles#index"
 end
