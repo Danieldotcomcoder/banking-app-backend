@@ -18,8 +18,10 @@ module Api
 
     # POST /accounts
     def create
-      @account = Account.new(account_params)
-      if @account.save
+      time = Time.now
+      @account = Account.create(account_params)
+      @account.number = time.strftime("%d%m%Y") + '-' + rand(10000000..99999999).to_s
+       if @account.save
          render json: 'Account Created sucessfully'.to_json, status: :ok 
       else
          render json: 'Something went wrong'.to_json, status: :error
@@ -54,7 +56,7 @@ module Api
 
     # Only allow a list of trusted parameters through.
     def account_params
-      params.permit(:name, :account_type, :number, :pin, :status, :user_id)
+      params.permit(:name, :account_type, :pin, :status, :user_id)
     end
   end
 end
