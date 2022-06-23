@@ -19,11 +19,10 @@ module Api
     # POST /accounts
     def create
       @account = Account.new(account_params)
-
       if @account.save
-        render json: @account, status: :created, location: @account
+         render json: 'Account Created sucessfully'.to_json, status: :ok 
       else
-        render json: @account.errors, status: :unprocessable_entity
+         render json: 'Something went wrong'.to_json, status: :error
       end
     end
 
@@ -39,6 +38,11 @@ module Api
     # DELETE /accounts/1
     def destroy
       @account.destroy
+      if @account.destroyed?
+           render json: 'Account Deleted sucessfully'.to_json, status: :ok 
+      else
+          render json: 'Something went wrong, Account is not deleted'.to_json, status: :error
+      end
     end
 
     private
