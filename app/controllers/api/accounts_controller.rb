@@ -7,7 +7,6 @@ module Api
     # GET /accounts
     def index
       @accounts = Account.all
-
       render json: @accounts
     end
 
@@ -18,9 +17,8 @@ module Api
 
     # POST /accounts
     def create
-      time = Time.now
       @account = Account.create(account_params)
-      @account.number = time.strftime("%d%m%Y") + '-' + rand(10000000..99999999).to_s
+      @account.number = AccountsHelper.account_number_generator(@account.account_type[0,1])
        if @account.save
          render json: 'Account Created sucessfully'.to_json, status: :ok 
       else
