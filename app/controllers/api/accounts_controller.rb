@@ -18,11 +18,11 @@ module Api
     # POST /accounts
     def create
       @account = Account.create(account_params)
-      @account.number = AccountsHelper.account_number_generator(@account.account_type[0,1])
-       if @account.save
-         render json: 'Account Created sucessfully'.to_json, status: :ok 
+      @account.number = AccountsHelper.account_number_generator(@account.account_type[0, 1])
+      if @account.save
+        render json: 'Account Created sucessfully'.to_json, status: :ok
       else
-         render json: 'Something went wrong'.to_json, status: :error
+        render json: 'Something went wrong'.to_json, status: :error
       end
     end
 
@@ -39,9 +39,9 @@ module Api
     def destroy
       @account.destroy
       if @account.destroyed?
-           render json: 'Account Deleted sucessfully'.to_json, status: :ok 
+        render json: 'Account Deleted sucessfully'.to_json, status: :ok
       else
-          render json: 'Something went wrong, Account is not deleted'.to_json, status: :error
+        render json: 'Something went wrong, Account is not deleted'.to_json, status: :error
       end
     end
 

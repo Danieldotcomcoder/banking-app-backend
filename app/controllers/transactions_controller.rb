@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class TransactionsController < ApplicationController
-  before_action :set_transaction, only: %i[ show update destroy ]
+  before_action :set_transaction, only: %i[show update destroy]
 
   # GET /transactions
   def index
@@ -39,13 +41,14 @@ class TransactionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_transaction
-      @transaction = Transaction.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def transaction_params
-      params.require(:transaction).permit(:transaction_type, :bank_name, :debit, :credit, :total_amount)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_transaction
+    @transaction = Transaction.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def transaction_params
+    params.require(:transaction).permit(:transaction_type, :bank_name, :debit, :credit, :total_amount)
+  end
 end
