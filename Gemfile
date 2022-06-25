@@ -19,6 +19,8 @@ gem 'jwt'
 gem 'cancancan'
 
 gem 'rubocop', require: false
+
+gem 'repost'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 
