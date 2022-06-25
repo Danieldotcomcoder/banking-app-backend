@@ -2,6 +2,7 @@
 
 class Account < ApplicationRecord
   belongs_to :user
+  has_many :transactions
 
   validates :name, presence: true
   validates :account_type, presence: true
