@@ -48,7 +48,7 @@ module Api
 
     # Only allow a list of trusted parameters through.
     def transaction_params
-      params.permit(:transaction_type, :bank_name, :debit, :credit, :total_amount)
+      params.permit(:transaction_type, :bank_name, :debit, :credit, :total_amount, :account_id)
     end
   end
 end

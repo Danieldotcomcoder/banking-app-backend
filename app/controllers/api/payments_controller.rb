@@ -20,7 +20,8 @@ module Api
       @payment = Payment.new(payment_params)
       if @payment.save
         service = TransactionCreator.new
-        service.call(total_amount: payment_params[:amount], transaction_type: payment_params[:payment_type])
+        service.call(total_amount: payment_params[:amount], transaction_type: payment_params[:payment_type],
+                     account_id: payment_params[:account_id])
         render json: 'Payment Is Made sucessfully'.to_json, status: :ok
       else
         render json: @payment.errors, status: :unprocessable_entity
@@ -50,7 +51,7 @@ module Api
 
     # Only allow a list of trusted parameters through.
     def payment_params
-      params.permit(:currency, :amount, :payment_type, :payment_address)
+      params.permit(:currency, :amount, :payment_type, :payment_address, :account_id)
     end
   end
 end

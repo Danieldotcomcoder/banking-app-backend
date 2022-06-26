@@ -10,6 +10,6 @@ class CreatePayments < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
-    add_reference :payments, :transaction, null: false, foreign_key: true
+    add_reference :payments, :account, null: false, foreign_key: true
   end
 end
