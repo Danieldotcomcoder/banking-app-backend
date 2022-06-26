@@ -22,8 +22,9 @@ module Api
         render json: 'Transaction Is Made sucessfully'.to_json, status: :ok
       else
         render json: @transaction.errors, status: :unprocessable_entity
+      end
     end
-  end
+
     # PATCH/PUT /transactions/1
     def update
       if @transaction.update(transaction_params)
