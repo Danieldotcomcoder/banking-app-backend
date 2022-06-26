@@ -19,7 +19,8 @@ module Api
     def create
       @payment = Payment.new(payment_params)
       if @payment.save
-
+        service = TransactionCreator.new
+        service.call(total_amount: payment_params[:amount], transaction_type: payment_params[:payment_type])
         render json: 'Payment Is Made sucessfully'.to_json, status: :ok
       else
         render json: @payment.errors, status: :unprocessable_entity

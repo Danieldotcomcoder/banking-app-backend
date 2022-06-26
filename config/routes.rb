@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :users, only: %i[create] do
       resources :accounts, only: %i[index create destroy] do
-        resources :transactions, only: %i[index create destroy post]
+        resources :transactions, only: %i[index create destroy]
         resources :payments, only: %i[index create destroy]
       end
     end

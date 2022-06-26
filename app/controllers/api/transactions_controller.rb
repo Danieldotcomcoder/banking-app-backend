@@ -18,14 +18,12 @@ module Api
     # POST /transactions
     def create
       @transaction = Transaction.new(transaction_params)
-
       if @transaction.save
-        render json: @transaction, status: :created, location: @transaction
+        render json: 'Transaction Is Made sucessfully'.to_json, status: :ok
       else
         render json: @transaction.errors, status: :unprocessable_entity
-      end
     end
-
+  end
     # PATCH/PUT /transactions/1
     def update
       if @transaction.update(transaction_params)
