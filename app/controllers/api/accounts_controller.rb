@@ -17,12 +17,16 @@ module Api
 
     # POST /accounts
     def create
-      @account = Account.create(account_params)
-      @account.number = AccountsHelper.account_number_generator(@account.account_type[0, 1])
-      if @account.save
-        render json: 'Account Created sucessfully'.to_json, status: :ok
-      else
-        render json: 'Something went wrong'.to_json, status: :error
+      if AccountsHelper.account_type_checker(account_params[:account_type]) == true
+        @account = Account.create(account_params)
+        @account.number = AccountsHelper.account_number_generator(@account.account_type[0, 1])
+          if @account.save
+             render json: 'Account Created sucessfully'.to_json, status: :ok
+          else
+            render json: 'Something went wrong, Account was not created'.to_json, status: :unprocessable_entity
+          end
+      else  
+        render json: 'This Account Type Does Not Exist'.to_json, status: :unprocessable_entity
       end
     end
 
