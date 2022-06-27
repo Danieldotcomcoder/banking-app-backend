@@ -22,6 +22,8 @@ module Api
         service = TransactionCreator.new
         service.call(total_amount: payment_params[:amount], transaction_type: payment_params[:payment_type],
                      account_id: payment_params[:account_id])
+        service2 = AccountBalanceUpdater.new
+        service2.call(payment_params[:amount].to_i, payment_params[:account_id].to_i)
         render json: 'Payment Is Made sucessfully'.to_json, status: :ok
       else
         render json: @payment.errors, status: :unprocessable_entity

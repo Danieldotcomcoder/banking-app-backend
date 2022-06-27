@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   namespace :api do
     resources :users, only: %i[create] do
-      resources :accounts, only: %i[index create destroy] do
+      resources :accounts, only: %i[index create destroy update] do
         resources :transactions, only: %i[index create destroy]
         resources :payments, only: %i[index create destroy]
       end

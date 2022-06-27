@@ -6,5 +6,4 @@ class Payment < ApplicationRecord
   validates :currency, presence: true
   validates :amount, presence: true
   validates :payment_type, presence: true
-
 end

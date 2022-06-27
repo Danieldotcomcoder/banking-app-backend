@@ -54,7 +54,7 @@ module Api
 
     # Only allow a list of trusted parameters through.
     def account_params
-      params.permit(:name, :account_type, :pin, :status, :user_id)
+      params.permit(:name, :account_type, :pin, :status, :user_id, :balance)
     end
   end
 end
