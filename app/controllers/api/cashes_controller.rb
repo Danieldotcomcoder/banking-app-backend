@@ -1,3 +1,4 @@
+module Api
 class CashesController < ApplicationController
   before_action :set_cash, only: %i[ show update destroy ]
 
@@ -48,4 +49,5 @@ class CashesController < ApplicationController
     def cash_params
       params.require(:cash).permit(:cash_name, :cash_amount)
     end
+end
 end

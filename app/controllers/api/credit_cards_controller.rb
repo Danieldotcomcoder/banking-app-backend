@@ -1,3 +1,4 @@
+module Api
 class CreditCardsController < ApplicationController
   before_action :set_credit_card, only: %i[ show update destroy ]
 
@@ -48,4 +49,5 @@ class CreditCardsController < ApplicationController
     def credit_card_params
       params.require(:credit_card).permit(:cardholder_name, :card_number, :card_cvv, :card_expiry_date, :card_balance)
     end
+end
 end

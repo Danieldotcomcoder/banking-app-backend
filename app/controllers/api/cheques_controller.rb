@@ -1,3 +1,4 @@
+module Api
 class ChequesController < ApplicationController
   before_action :set_cheque, only: %i[ show update destroy ]
 
@@ -48,4 +49,5 @@ class ChequesController < ApplicationController
     def cheque_params
       params.require(:cheque).permit(:cheque_number, :cheque_bank, :cheque_name, :cheque_amount)
     end
+end
 end
