@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module AccountsHelper
-  def self.account_number_generator(letter)
+  def account_number_generator(acctype)
     time = Time.now
-    "#{letter}-#{time.strftime('%d%m%Y')}-#{rand(10_000_000..99_999_999)}"
+    "#{acctype[0, 1]}-#{time.strftime('%d%m%Y')}-#{rand(10_000_000..99_999_999)}"
   end
 
   def self.account_type_checker(type)

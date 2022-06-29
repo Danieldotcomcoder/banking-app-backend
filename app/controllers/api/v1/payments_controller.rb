@@ -30,7 +30,7 @@ module Api
           render json: @payment.errors, status: :unprocessable_entity
         end
       else
-        render json: 'This payment type is not availiable'.to_json, status: :unprocessable_entity
+        render json: 'Wrong Payment Type'.to_json, status: :unprocessable_entity
       end
     end
 

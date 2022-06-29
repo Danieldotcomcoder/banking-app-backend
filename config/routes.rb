@@ -6,13 +6,16 @@ Rails.application.routes.draw do
   resources :credit_cards
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   namespace :api do
-    resources :users, only: %i[create] do
-      resources :accounts, only: %i[index create destroy update] do
-        resources :transactions, only: %i[index create destroy]
-        resources :payments, only: %i[index create destroy]
+    namespace :v1 do
+      post '/auth/login', to: 'authentication#login'
+      get '/*a', to: 'application#not_found'
+      resources :users, only: %i[create] do
+        resources :accounts, only: %i[index create destroy update] do
+          resources :transactions, only: %i[index create destroy]
+          resources :payments, only: %i[index create destroy]
+        end
       end
     end
   end
-  post '/auth/login', to: 'authentication#login'
-  get '/*a', to: 'application#not_found'
+
 end
