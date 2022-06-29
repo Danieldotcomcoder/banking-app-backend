@@ -17,16 +17,20 @@ module Api
 
     # POST /payments
     def create
-      @payment = Payment.new(payment_params)
-      if @payment.save
-        service = TransactionCreator.new
-        service.call(total_amount: payment_params[:amount], transaction_type: payment_params[:payment_type],
-                     account_id: payment_params[:account_id])
-        service2 = AccountBalanceUpdater.new
-        service2.call(payment_params[:amount].to_i, payment_params[:account_id].to_i)
-        render json: 'Payment Is Made sucessfully'.to_json, status: :ok
+      if PaymentsHelper.payment_type_checker(payment_params[:payment_type]) == true
+        @payment = Payment.new(payment_params)
+        if @payment.save
+          service = TransactionCreator.new
+          service.call(total_amount: payment_params[:amount], transaction_type: payment_params[:payment_type],
+                       account_id: payment_params[:account_id])
+          service2 = AccountBalanceUpdater.new
+          service2.call(payment_params[:amount].to_i, payment_params[:account_id].to_i)
+          render json: 'Payment Is Made sucessfully'.to_json, status: :ok
+        else
+          render json: @payment.errors, status: :unprocessable_entity
+        end
       else
-        render json: @payment.errors, status: :unprocessable_entity
+        render json: 'This payment type is not availiable'.to_json, status: :unprocessable_entity
       end
     end
 

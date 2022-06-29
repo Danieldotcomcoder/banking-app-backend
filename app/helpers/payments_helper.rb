@@ -2,7 +2,7 @@
 
 module PaymentsHelper
   def self.payment_type_checker(type)
-    if ['Cash', 'CreditCard', 'Cheque'].include?(type)
+    if %w[Cash CreditCard Cheque].include?(type)
       true
     else
       false

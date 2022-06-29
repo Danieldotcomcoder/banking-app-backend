@@ -1,4 +1,5 @@
-class Cash < ApplicationRecord
-    belongs_to :payment
+# frozen_string_literal: true
 
+class Cash < ApplicationRecord
+  belongs_to :payment
 end
