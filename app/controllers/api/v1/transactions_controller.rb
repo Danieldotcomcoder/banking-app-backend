@@ -3,6 +3,7 @@
 module Api
   module V1
     class TransactionsController < ApplicationController
+      include TransactionsHelper
       before_action :set_transaction, only: %i[show update destroy]
 
       # GET /transactions
@@ -19,7 +20,9 @@ module Api
       # POST /transactions
       def create
         @transaction = Transaction.new(transaction_params)
+      
         if @transaction.save
+          transaction_type_controller(@transaction)
           render json: 'Transaction Is Made sucessfully'.to_json, status: :ok
         else
           render json: @transaction.errors, status: :unprocessable_entity
