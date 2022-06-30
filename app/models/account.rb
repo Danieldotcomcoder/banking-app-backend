@@ -2,7 +2,8 @@
 
 class Account < ApplicationRecord
   belongs_to :user
-  has_many :transactions
+  has_many :transactions, dependent: :destroy
+  has_many :Payments, dependent: :destroy
 
   validates :name, presence: true
   validates :account_type, presence: true
