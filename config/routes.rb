@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
- 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   namespace :api do
     namespace :v1 do
@@ -12,7 +11,7 @@ Rails.application.routes.draw do
           resources :transactions, only: %i[index create destroy]
           resources :payments, only: %i[index create destroy]
           resources :cheques
-          resources :cashes
+          resources :cashes, only: %i[create]
           resources :credit_cards
         end
       end

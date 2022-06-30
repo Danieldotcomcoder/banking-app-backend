@@ -4,6 +4,7 @@ module Api
   module V1
     class PaymentsController < ApplicationController
       include PaymentsHelper
+      include TransactionsHelper
       before_action :set_payment, only: %i[show update destroy]
 
       # GET /payments
@@ -23,11 +24,13 @@ module Api
           account_balance_updater_service = AccountBalanceUpdater.new
           if account_balance_updater_service.call(payment_params[:amount].to_i,
                                                   payment_params[:account_id].to_i) == true
-            @payment = Payment.new(payment_params)
+            @payment = Payment.create(currency: payment_params[:currency], amount: payment_params[:amount],
+                                      payment_type: payment_params[:payment_type], account_id: payment_params[:account_id])
             if @payment.save
               create_transaction_service = TransactionCreator.new
               create_transaction_service.call(total_amount: payment_params[:amount], transaction_type: payment_params[:payment_type],
                                               account_id: payment_params[:account_id])
+              transaction_type_controller(@payment)
               render json: 'Payment Is Made Successfully'.to_json, status: :ok
             else
               render json: 'Something Went Wrong, Payment is not Made'.to_json, status: :unprocessable_entity
@@ -63,7 +66,7 @@ module Api
 
       # Only allow a list of trusted parameters through.
       def payment_params
-        params.permit(:currency, :amount, :payment_type, :payment_address, :account_id)
+        params.permit(:amount, :payment_type, :currency, :payment_address, :account_id, :user_id)
       end
     end
   end
