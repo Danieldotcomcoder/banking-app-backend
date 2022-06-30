@@ -6,8 +6,18 @@ module TransactionsHelper
 
     when 'Cash'
       Cash.create(cash_amount: payment.amount, payment_id: payment.id)
+
+    when 'CreditCard'
+
     else
       puts 'Invalid Transaction Type'
     end
+  end
+
+
+  def check_credit_card(account_id)
+    @creditcard = CreditCard.find_by(account_id: account_id)
+    
+
   end
 end
