@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 module TransactionsHelper
-  def transaction_type_controller(transaction)
-    case transaction.transaction_type
+  def transaction_type_controller(trans)
+    case trans.transaction_type
 
     when 'Cash'
-      Cash.create(cash_amount: transaction.total_amount, payment_id: payment.id)
+      Cash.create(cash_amount: trans.total_amount, payment_id: trans.payment_id)
     # when 'CreditCard'
     #   if check_credit_card(payment.account_id) == true
     #     @creditcard = CreditCard.find_by(account_id: account_id)
