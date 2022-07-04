@@ -19,9 +19,9 @@ module Api
       # POST /transactions
       def create
         @transaction = Transaction.new(transaction_params)
-        
+
         if @transaction.save
-         
+
           render json: 'Transaction Is Made sucessfully'.to_json, status: :ok
         else
           render json: @transaction.errors, status: :unprocessable_entity
