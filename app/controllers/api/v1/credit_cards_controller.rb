@@ -19,12 +19,13 @@ module Api
 
       # POST /credit_cards
       def create
-        @credit_card = CreditCard.new(credit_card_params)
+        @credit_card = CreditCard.create(cardholder_name: credit_card_params[:cardholder_name],
+                                         card_number: credit_card_params[:card_number], card_cvv: credit_card_params[:card_cvv], card_expiry_date: credit_card_params[:card_expiry_date], account_id: credit_card_params[:account_id])
 
         if @credit_card.save
-          render json: @credit_card, status: :created, location: @credit_card
+          render json: 'Credit Card created successfuly'.to_json, status: :ok
         else
-          render json: @credit_card.errors, status: :unprocessable_entity
+          render json: 'Credit Card is not created'.to_json, status: :unprocessable_entity
         end
       end
 
@@ -51,7 +52,7 @@ module Api
 
       # Only allow a list of trusted parameters through.
       def credit_card_params
-        params.permit(:cardholder_name, :card_number, :card_cvv, :card_expiry_date, :card_balance, :account_id, :payment_id)
+        params.permit(:cardholder_name, :card_number, :card_cvv, :card_expiry_date, :card_balance, :account_id, :user_id)
       end
     end
   end

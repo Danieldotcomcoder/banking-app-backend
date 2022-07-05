@@ -24,7 +24,5 @@ module TransactionsHelper
     @cc = CreditCard.find_by(id: 1)
     puts @cc
   end
-
-
 end
 TransactionsHelper.check_credit_card
