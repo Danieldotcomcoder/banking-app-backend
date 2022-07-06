@@ -25,10 +25,10 @@ module Api
           account_balance_updater_service = AccountBalanceUpdater.new
           @payment = Payment.create(currency: payment_params[:currency], amount: payment_params[:amount],
                                     payment_type: payment_params[:payment_type], account_id: payment_params[:account_id])
-          if account_balance_updater_service.call(payment_params[:amount].to_i,
-                                                  payment_params[:account_id].to_i) == true
 
-            if transaction_type_controller(@payment) == true
+          if transaction_type_controller(@payment) == true
+            if account_balance_updater_service.call(payment_params[:amount].to_i,
+                                                    payment_params[:account_id].to_i) == true
               if @payment.save
                 create_transaction_service = TransactionCreator.new
                 create_transaction_service.call(total_amount: payment_params[:amount], transaction_type: payment_params[:payment_type],
@@ -40,11 +40,12 @@ module Api
               end
             else
               @payment.destroy
-              render json: 'Transaction Error: Check your balance or other data'.to_json, status: :unprocessable_entity
+              render json: 'Sorry Not Enough Balance'.to_json, status: :unprocessable_entity
             end
           else
             @payment.destroy
-            render json: 'Sorry Not Enough Balance'.to_json, status: :unprocessable_entity
+            render json: 'Transaction Error: Check your balance or other data'.to_json, status: :unprocessable_entity
+
           end
 
         else
