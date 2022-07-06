@@ -52,7 +52,8 @@ module Api
 
       # Only allow a list of trusted parameters through.
       def credit_card_params
-        params.permit(:cardholder_name, :card_number, :card_cvv, :card_expiry_date, :card_balance, :account_id, :user_id)
+        params.permit(:cardholder_name, :card_number, :card_cvv, :card_expiry_date, :card_balance, :account_id,
+                      :user_id)
       end
     end
   end

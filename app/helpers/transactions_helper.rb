@@ -25,8 +25,7 @@ module TransactionsHelper
       false
     else
       true
-  
+
+    end
   end
 end
-end
-
