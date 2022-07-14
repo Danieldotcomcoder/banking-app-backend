@@ -44,7 +44,8 @@ module Api
             end
           else
             @payment.destroy
-            render json: 'Transaction Error: Check your balance or other enter your credit'.to_json, status: :unprocessable_entity
+            render json: 'Transaction Error: Check your balance or other enter your credit'.to_json,
+                   status: :unprocessable_entity
 
           end
 

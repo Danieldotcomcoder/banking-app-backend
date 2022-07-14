@@ -19,7 +19,6 @@ module Api
 
       # POST /credit_cards
       def create
-        
         @credit_card = CreditCard.create(cardholder_name: credit_card_params[:cardholder_name],
                                          card_number: credit_card_params[:card_number], card_cvv: credit_card_params[:card_cvv], card_expiry_date: credit_card_params[:card_expiry_date], account_id: credit_card_params[:account_id])
 
