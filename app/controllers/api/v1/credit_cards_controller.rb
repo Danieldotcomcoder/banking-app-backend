@@ -20,7 +20,8 @@ module Api
 
       # POST /credit_cards
       def create
-        @credit_card = CreditCard.create(cardholder_name: credit_card_params[:cardholder_name], account_id: credit_card_params[:account_id], card_balance: credit_card_params[:card_balance])
+        @credit_card = CreditCard.create(cardholder_name: credit_card_params[:cardholder_name],
+                                         account_id: credit_card_params[:account_id], card_balance: credit_card_params[:card_balance])
         @credit_card.card_number = credit_card_16_d_number_generator
         @credit_card.card_cvv = credit_card_cvv
         @credit_card.card_expiry_date = credit_card_expiry_date
