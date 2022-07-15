@@ -3,16 +3,16 @@
 module CreditCardsHelper
   require 'date'
   def credit_card_16_d_number_generator
-    "#{rand(1000..9999)}_#{rand(1000..9999)}_#{rand(1000..9999)}_#{rand(1000..9999)}"
+   "#{rand(1000..9999)}_#{rand(1000..9999)}_#{rand(1000..9999)}_#{rand(1000..9999)}".to_i
   end
 
   def credit_card_cvv
-    rand(100..999).to_s
+    rand(100..999)
   end
 
-  def self.created_card_expiry_date
-    time = DateTime.now.next_year(5).to_time.strftime('%Y-%m')
+  def credit_card_expiry_date
+    DateTime.now.next_year(5).to_time
   end
 end
 
-CreditCardsHelper.created_card_expiry_date
+

@@ -3,6 +3,7 @@
 module Api
   module V1
     class CreditCardsController < ApplicationController
+      include CreditCardsHelper
       before_action :set_credit_card, only: %i[show update destroy]
 
       # GET /credit_cards
@@ -19,9 +20,10 @@ module Api
 
       # POST /credit_cards
       def create
-        @credit_card = CreditCard.create(cardholder_name: credit_card_params[:cardholder_name],
-                                         card_number: credit_card_params[:card_number], card_cvv: credit_card_params[:card_cvv], card_expiry_date: credit_card_params[:card_expiry_date], account_id: credit_card_params[:account_id])
-
+        @credit_card = CreditCard.create(cardholder_name: credit_card_params[:cardholder_name], account_id: credit_card_params[:account_id])
+        # @credit_card.card_number = credit_card_16_d_number_generator()
+        @credit_card.card_cvv = credit_card_cvv()
+        @credit_card.card_expiry_date = credit_card_expiry_date()
         if @credit_card.save
           render json: 'Credit Card created successfuly'.to_json, status: :ok
         else
