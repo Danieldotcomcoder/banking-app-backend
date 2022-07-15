@@ -3,7 +3,7 @@
 module CreditCardsHelper
   require 'date'
   def credit_card_16_d_number_generator
-   "#{rand(1000..9999)}_#{rand(1000..9999)}_#{rand(1000..9999)}_#{rand(1000..9999)}".to_i
+    "#{rand(1000..9999)}_#{rand(1000..9999)}_#{rand(1000..9999)}_#{rand(1000..9999)}"
   end
 
   def credit_card_cvv
@@ -14,5 +14,3 @@ module CreditCardsHelper
     DateTime.now.next_year(5).to_time
   end
 end
-
-
