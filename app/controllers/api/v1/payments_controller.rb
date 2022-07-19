@@ -28,7 +28,7 @@ module Api
 
           if transaction_type_controller(@payment) == true
             if account_balance_updater_service.call(payment_params[:amount].to_i,
-                                                    payment_params[:account_id].to_i) == true
+                                                    payment_params[:account_id].to_i, payment_params[:payment_type]) == true
               if @payment.save
                 create_transaction_service = TransactionCreator.new
                 create_transaction_service.call(total_amount: payment_params[:amount], transaction_type: payment_params[:payment_type],
