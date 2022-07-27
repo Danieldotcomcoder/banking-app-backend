@@ -11,7 +11,7 @@ Rails.application.routes.draw do
           resources :transactions, only: %i[index create destroy]
           resources :payments, only: %i[index create destroy]
           resources :cheques
-          resources :cashes, only: %i[create]
+          resources :cashes, only: %i[index create]
           resources :credit_cards, only: %i[index create update]
         end
       end
